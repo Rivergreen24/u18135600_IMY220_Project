@@ -1,0 +1,19 @@
+{
+  "name": "u18135600_imy220_project",
+  "version": "1.0.0",
+  "description": "Version Control Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rivergreen24/u18135600_IMY220_Project.git"
+  },
+  "author": "u18135600",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rivergreen24/u18135600_IMY220_Project/issues"
+  },
+  "homepage": "https://github.com/Rivergreen24/u18135600_IMY220_Project#readme"
+}
