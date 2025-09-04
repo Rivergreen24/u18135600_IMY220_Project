@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
-import Navbar from "../components/navbar";
+import Header from "../components/Header";
 import Feed from "../components/Feed";
 import SearchInput from "../components/SearchInput";
 
@@ -14,7 +14,7 @@ const Home =()=>{
     return(
         <div>
             <h2>Home Page</h2>
-            <Navbar/>
+            <Header/>
             <SearchInput/>
             <Feed projects={dummyFeedProjects}/>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
-import Navbar from "../components/navbar";
+import Header from "../components/Header";
 import { useParams } from "react-router-dom";
 import CreateProject from "../components/CreateProject";
 import ProfileComp from "../components/ProfileComp";
@@ -26,13 +26,13 @@ function Profile() {
 
     const dummyFriends = [
         { name: 'Jason', bio: 'Friend bio 1' },
-        { name: 'Erik', bio: 'Friend bio 2' }
+        { name: 'Erik', bio: 'Friend bio 2' }   
     ];
 
     return (
         <div>
-            <h2>Hello, this is a Profile</h2>
-            <Navbar />
+            <h2>Profile Page</h2>
+            <Header />
             <h3>Profile Page for user {id}</h3>
             <ProfileComp profileData={profileData} />
             <EditProfile/>

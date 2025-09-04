@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
-import Navbar from "../components/navbar";
+import Header from "../components/Header";
 import { useParams } from "react-router";
 import ProjectPreview from "../components/ProjectPreview";
 import ProjectComp from "../components/ProjectComp";
@@ -28,7 +28,7 @@ const Project = () => {
     return (
         <div>
             <h2>Project Page</h2>
-            <Navbar />
+            <Header />
             <h3>Project Page for user {id}</h3>
             <ProjectComp  projectData={projectData}/>
             <Files files={dummyFiles}/>

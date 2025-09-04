@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 const app = express();
-const port = 3060;
+const port = 3000;
 
 app.use(express.json());
 app.use(express.static("./frontend/public")); //changed to "./frontend/public" instead of "public" this so that it actually hmmm

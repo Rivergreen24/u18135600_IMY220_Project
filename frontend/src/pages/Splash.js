@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
-import Navbar from "../components/navbar";
+import Header from "../components/Header";
 import LoginForm from "../components/LoginForm";
 import SignUpForm from "../components/SignUpForm";
 

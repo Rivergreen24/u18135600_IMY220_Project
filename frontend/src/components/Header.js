@@ -3,7 +3,7 @@ import ReactDom from "react-dom/client";
 
 import { BrowserRouter, Routes, Route, Link  } from "react-router";
 
-const Navbar =()=>{
+const Header =()=>{
     return(
         <nav>
             <ul>
@@ -16,4 +16,4 @@ const Navbar =()=>{
     )
 }
 
-export default Navbar;
+export default Header;
