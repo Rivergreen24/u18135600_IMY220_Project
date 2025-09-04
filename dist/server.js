@@ -5,10 +5,12 @@ var _path = _interopRequireDefault(require("path"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 var app = (0, _express["default"])();
 var port = 3060;
+app.use(_express["default"].json());
 app.use(_express["default"]["static"]("./frontend/public")); //changed to "./frontend/public" instead of "public" this so that it actually hmmm
 
 app.post('/signup', function (req, res) {
   // Dummy response
+
   res.json({
     success: true,
     message: 'User signed up (stubbed)',
@@ -19,6 +21,10 @@ app.post('/signup', function (req, res) {
 // Stubbed sign-in endpoint
 app.post('/signin', function (req, res) {
   // Dummy response
+  var _req$body = req.body,
+    email = _req$body.email,
+    password = _req$body.password;
+  console.log("Login request:", email, password);
   res.json({
     success: true,
     message: 'User signed in (stubbed)',
