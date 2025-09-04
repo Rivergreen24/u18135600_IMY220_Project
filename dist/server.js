@@ -10,7 +10,10 @@ app.use(_express["default"]["static"]("./frontend/public")); //changed to "./fro
 
 app.post('/signup', function (req, res) {
   // Dummy response
-
+  var _req$body = req.body,
+    email = _req$body.email,
+    password = _req$body.password;
+  console.log("Login request:", email, password);
   res.json({
     success: true,
     message: 'User signed up (stubbed)',
@@ -21,9 +24,9 @@ app.post('/signup', function (req, res) {
 // Stubbed sign-in endpoint
 app.post('/signin', function (req, res) {
   // Dummy response
-  var _req$body = req.body,
-    email = _req$body.email,
-    password = _req$body.password;
+  var _req$body2 = req.body,
+    email = _req$body2.email,
+    password = _req$body2.password;
   console.log("Login request:", email, password);
   res.json({
     success: true,

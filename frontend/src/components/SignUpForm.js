@@ -44,7 +44,7 @@ const SignUpForm = () => {
 
       if (data.success) {
         localStorage.setItem("token", data.token);
-
+        console.log("stubbing complete");
         navigate("/profile/2");
       } else {
         setError("Signup failed (stubbed)");

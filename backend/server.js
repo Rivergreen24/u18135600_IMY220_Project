@@ -9,7 +9,8 @@ app.use(express.static("./frontend/public")); //changed to "./frontend/public" i
 
 app.post('/signup', (req, res) => {
   // Dummy response
-
+  const { email, password } = req.body;
+  console.log("Signup request:", email, password);
   res.json({ success: true, message: 'User signed up (stubbed)', token: 'dummy-token' });
 });
 
