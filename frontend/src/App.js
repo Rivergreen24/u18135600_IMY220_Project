@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Link, Routes, Route } from "react-router";
 
-import Navbar from "./components/navbar";
 import Home from "./pages/Home";
 import Splash from "./pages/Splash";    
 import Project from "./pages/Project";
 import Navish from "./components/navish";
+import Profile from "./pages/Profile";
 
 
 
@@ -15,13 +15,14 @@ export const App = () => {
     return (
         <BrowserRouter>
             <div>
-                <h2> Hello React! This is a fucking waste of time, why did I do this to myself... or did I? I think I did</h2>
+                <h1>ALYXX</h1>
             </div>
-            <Navbar/>
             <Routes>
                 <Route path="/" element={<><Navish/><Splash/></>}/>
-                <Route path="/home" element={<><Navish/><Home/></>}/>
-                <Route path="/project" element={<Project/>}/>
+                <Route path="/home" element={<><Home/></>}/>
+                {/* this is the dynamic ones */}
+                <Route path="/project/:id" element={<Project/>}/> 
+                <Route path="/profile/:id" element={<Profile/>}/>
             </Routes>
 
 
