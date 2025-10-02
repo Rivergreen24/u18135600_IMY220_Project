@@ -1,0 +1,16 @@
+/* Home Page Styles */
+
+.home-header {
+  background-color: #e6d698; /* secondary colour like ALYXX bar */
+  color: #041c28;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.home-header h2 {
+  margin: 0;
+  font-family: 'Brawler', serif; /* match ALYXX heading */
+  font-size: 2rem;
+  color: #041c28; /* dark primary for contrast */
+}

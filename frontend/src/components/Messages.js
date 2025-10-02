@@ -1,12 +1,14 @@
 import React from 'react';
 
-const Messages = ({messges}) => {
+const Messages = ({messages}) => {
   return (
-    <section>
+    <section className="messages-section">
       <h3>Messages</h3>
-      {messges.map((msg,index)=>(
-        <p key={index}>{msg}</p>
-      ))}
+      <div className="messages-log">
+        {messages.map((msg, index) => (
+          <div key={index} className="message-item">{msg}</div>
+        ))}
+      </div>
     </section>
   );
 };

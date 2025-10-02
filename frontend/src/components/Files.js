@@ -2,10 +2,12 @@ import React from 'react';
 //add dummy data
 const Files = ({files}) => {
   return (
-    <section>
+    <section className="files-section">
       <h3>Files</h3>
-      <ul>
-        {files.map((file, index) => <li key={index}>{file}</li>)}
+      <ul className="files-list">
+        {files.map((file, index) => (
+          <li key={index} className="file-item">{file}</li>
+        ))}
       </ul>
     </section>
   );

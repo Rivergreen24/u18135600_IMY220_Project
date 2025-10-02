@@ -8,7 +8,7 @@
 html, body {
   font-family: 'Roboto', sans-serif;  /* Custom font - meets q/r */
   line-height: 1.6;
-  color: #d2dee4;  /* Primary navy text - meets s */
+  color: #82a6b8;  /* Primary navy text - meets s */
   background: linear-gradient(135deg, #447c93, #041c28);    /* Light neutral bg for contrast */
 }
 
@@ -110,4 +110,28 @@ button:hover {
     font-family: 'Poppins', sans-serif;
     font-size: 2.5rem;            /* bigger title */
     margin: 0;                    /* remove default margins */
+}
+
+/* Search Input */
+.search-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.search-input {
+  width: 60%;
+  max-width: 500px;
+  padding: 10px 15px;
+  border: 2px solid #e6d698;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+  outline: none;
+  transition: 0.3s;
+  background-color: #b3a984;
+}
+
+.search-input:focus {
+  border-color: #447c93; /* light primary */
+  box-shadow: 0 0 8px rgba(68, 124, 147, 0.5);
 }

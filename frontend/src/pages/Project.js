@@ -26,17 +26,32 @@ const Project = () => {
 
 
     return (
-        <div>
-            <h2>Project Page</h2>
+        <div className="project-container">
+            <h2 className="page-title">Project Page</h2>
             <Header />
-            <h3>Project Page for user {id}</h3>
-            <ProjectComp  projectData={projectData}/>
-            <Files files={dummyFiles}/>
-            <Messages messges={dummyMessages}/>
-            <EditProject/>
+
+            <h3 className="project-id">Project Page for user {id}</h3>
+
+            <section className="project-section">
+                <ProjectComp projectData={projectData} />
+            </section>
+
+            <section className="project-section">
+                <Files files={dummyFiles} />
+            </section>
+
+            <section className="project-section">
+                <Messages messages={dummyMessages} />
+            </section>
+
+            <section className="project-section">
+                <EditProject />
+            </section>
+            <p>These changes are beign made</p>
+
 
         </div>
     )
 }
 
-export default Project;
+export default Project; 

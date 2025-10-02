@@ -39,16 +39,10 @@
   background-color: rgba(68, 124, 147, 0.1);  /* Light teal tint for highlight */
 }
 
-/* Responsive: Stack on mobile (layout theme - meets t) */
-@media (max-width: 768px) {
-  .nav-list {
-    flex-direction: column;  /* Vertical stack */
-    gap: 0.5rem;
-    justify-content: center;
-  }
-  
-  .nav-link {
-    display: block;  /* Full-width on small screens */
-    text-align: center;
-  }
+h1, h2 {
+  font-family: 'Brawler', serif;
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
 }

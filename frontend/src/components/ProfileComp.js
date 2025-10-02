@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProfileComp = ({profileData}) => {
   return (
-    <article>
+    <article className="profile-main-card">
       <h2>{profileData.name}'s Profile</h2>
       <p>Bio: {profileData.bio}</p>
     </article>

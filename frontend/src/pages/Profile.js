@@ -30,15 +30,32 @@ function Profile() {
     ];
 
     return (
-        <div>
-            <h2>Profile Page</h2>
-            <Header />
-            <h3>Profile Page for user {id}</h3>
-            <ProfileComp profileData={profileData} />
-            <EditProfile/>
-            <UserProjects projects={dummyProjects}/>
-            <Friends friends={dummyFriends}/>
-            <CreateProject />
+        <div className="profile-container">
+
+            <h2 className="page-title">Profile Page</h2>
+
+                      <Header />  
+            <h3 className="profile-id">Profile for user {id}</h3>
+
+            <section className="profile-section">
+                <ProfileComp profileData={profileData} />
+            </section>
+
+            <section className="profile-section">
+                <EditProfile />
+            </section>
+
+            <section className="profile-section">
+                <UserProjects projects={dummyProjects} />
+            </section>
+
+            <section className="profile-section">
+                <Friends friends={dummyFriends} />
+            </section>
+
+            <section className="profile-section">
+                <CreateProject />
+            </section>
         </div>
 
     );

@@ -8,10 +8,12 @@ import SignUpForm from "../components/SignUpForm";
 
 const Splash =()=>{
     return(
-        <div>
-            <h2>Hello, this is the splash kaboom!</h2>
-            <LoginForm/>
-            <SignUpForm/>
+        <div className="splash-page">
+            <h1 className="splash-title">Welcome to ALYXX</h1>
+            <div className="auth-forms">
+                <LoginForm />
+                <SignUpForm />
+            </div>
         </div>
     )
 }
