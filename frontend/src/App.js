@@ -19,7 +19,7 @@ export const App = () => {
             <Routes>
                 <Route path="/" element={<><Splash/></>}/>
                 <Route path="/home" element={<><Home/></>}/>
-                {/* this is the dynamic ones */}
+                {/* this is the dynamic ones hello there */}
                 <Route path="/project/:id" element={<Project/>}/> 
                 <Route path="/profile/:id" element={<Profile/>}/>
             </Routes>
