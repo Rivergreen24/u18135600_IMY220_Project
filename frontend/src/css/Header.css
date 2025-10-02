@@ -1,0 +1,54 @@
+/* Header.css - Specific to Header component */
+
+/* Import global variables if needed (optional - for reuse) */
+/* Pulls in your base colors/font - keeps theme consistent */
+
+/* Header-specific styles (gold nav theme - meets s) */
+.header-nav {
+  background-color: #e6d698;  /* Secondary gold for navbar */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
+  position: sticky;  /* Sticks to top on scroll - improves layout flow */
+  top: 0;
+  z-index: 10;
+}
+
+.nav-list {
+  display: flex;  /* Horizontal layout - meets t */
+  justify-content: flex-end;  /* Right-align links for clean look */
+  list-style: none;  /* No bullets */
+  gap: 2rem;  /* Spacing between items */
+  padding: 1rem 0;  /* Vertical padding for breathing room */
+  margin: 0;  /* Reset default margin */
+}
+
+.nav-item {
+  margin: 0;  /* No extra spacing on items */
+}
+
+.nav-link {
+  color: #041c28;  /* Primary navy text - meets s */
+  text-decoration: none;  /* No underline */
+  font-weight: 500;  /* Medium weight (inherits Roboto from global) */
+  padding: 0.5rem 1rem;  /* Touch-friendly padding */
+  border-radius: 4px;  /* Subtle rounding */
+  transition: color 0.3s ease, background-color 0.3s ease;  /* Smooth hover */
+}
+
+.nav-link:hover {
+  color: #447c93;  /* Primary teal on hover - meets s */
+  background-color: rgba(68, 124, 147, 0.1);  /* Light teal tint for highlight */
+}
+
+/* Responsive: Stack on mobile (layout theme - meets t) */
+@media (max-width: 768px) {
+  .nav-list {
+    flex-direction: column;  /* Vertical stack */
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  
+  .nav-link {
+    display: block;  /* Full-width on small screens */
+    text-align: center;
+  }
+}

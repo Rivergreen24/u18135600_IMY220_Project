@@ -13,7 +13,7 @@ export const App = () => {
 
     return (
         <BrowserRouter>
-            <div>
+            <div className="app-title">
                 <h1>ALYXX</h1>
             </div>
             <Routes>

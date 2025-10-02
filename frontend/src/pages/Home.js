@@ -13,7 +13,7 @@ const dummyFeedProjects = [
 const Home =()=>{
     return(
         <div>
-            <h2>Home Page</h2>
+            <h2>Home Page </h2>
             <Header/>
             <SearchInput/>
             <Feed projects={dummyFeedProjects}/>
