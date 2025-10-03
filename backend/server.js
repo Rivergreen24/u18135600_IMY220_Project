@@ -70,8 +70,8 @@ app.post('/api/auth/login', async (req, res) => {
 
     if (user && user.password === password) {
       res.json({
-        success: true,                // <-- success flag
-        message: "Login successful",  // <-- descriptive message
+        success: true,               
+        message: "Login successful",  
         user: {
           id: user._id,
           username: user.username,
@@ -80,7 +80,7 @@ app.post('/api/auth/login', async (req, res) => {
       });
     } else {
       res.status(401).json({
-        success: false,               // <-- failed flag
+        success: false,              
         message: "Invalid credentials"
       });
     }
@@ -103,7 +103,7 @@ app.post('/api/auth/signup', async (req, res) => {
   }
 });
 
-// Routes: Profiles (view/edit own—'me' hardcoded to user1 for demo)
+
 app.get('/api/users/:id', async (req, res) => {
   try {
     const targetId = req.params.id === 'me' ? 'user1' : req.params.id;
@@ -124,7 +124,7 @@ app.put('/api/users/:id', async (req, res) => {
   }
 });
 
-// Routes: Projects (list/create/view/checkin)
+
 app.get('/api/projects', async (req, res) => {
   try {
     const projects = await db.collection('projects').find({}).toArray();
@@ -136,7 +136,7 @@ app.get('/api/projects', async (req, res) => {
 
 app.post('/api/projects', async (req, res) => {
   try {
-    const project = { ...req.body, owner: 'user1', checkins: [] };  // Hardcode owner for demo
+    const project = { ...req.body, owner: 'user1', checkins: [] }; 
     const result = await db.collection('projects').insertOne(project);
     res.json({ id: result.insertedId });
   } catch (err) {
@@ -153,14 +153,14 @@ app.get('/api/projects/:id', async (req, res) => {
   }
 });
 
-app.put('/api/projects/:id', async (req, res) => {  // For checkin/update
+app.put('/api/projects/:id', async (req, res) => { 
   try {
-    const { checkin } = req.body;  // e.g., { message: 'New checkin' }
+    const { checkin } = req.body;  
     await db.collection('projects').updateOne(
       { _id: req.params.id },
       { 
         $set: req.body,  // For other updates
-        $push: { checkins: { ...checkin, user: 'user1', timestamp: new Date() } }  // Hardcode user
+        $push: { checkins: { ...checkin, user: 'user1', timestamp: new Date() } }  
       }
     );
     res.json({ message: 'Updated' });
