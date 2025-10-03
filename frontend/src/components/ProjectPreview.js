@@ -1,12 +1,15 @@
 import React from 'react';
-//make this use passed down props
+
 const ProjectPreview = ({ project }) => {
+  // Get contributors from checkins, or empty array if undefined
+  const contributors = project.checkins?.map(c => c.user) || [];
+
   return (
     <article className="project-card">
-      <h3>{project.title}</h3>
+      <h3>{project.name}</h3>
       <p>{project.description}</p>
       <p className="contributors">
-        Contributors: {project.contributors.join(', ')}
+        Contributors: {contributors.length > 0 ? contributors.join(', ') : 'None'}
       </p>
     </article>
   );
