@@ -1,21 +1,44 @@
-import React from "react";
-import ReactDom from "react-dom/client";
-import { BrowserRouter, Routes, Route, Link } from "react-router";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
-    return (
-        <nav className="header-nav">
-            <div className="container">
-                <ul className="nav-list">
-                    <li className="nav-item"><Link to="/">Splash</Link></li>
-                    <li className="nav-item"><Link to="/home">Home</Link></li>
-                    <li className="nav-item"><Link to="/project/1">Project</Link></li>
-                    <li className="nav-item"><Link to="/profile/1">Profile</Link></li>
-                </ul>
-            </div>
+  const [user, setUser] = useState(null);
 
-        </nav>
-    )
-}
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) setUser(JSON.parse(storedUser));
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    window.location.href = "/"; // redirect to splash/login page
+  };
+
+  return (
+    <nav className="header-nav">
+      <div className="container">
+        <ul className="nav-list">
+          {user ? (
+            <>
+              <li className="nav-item">
+                <button onClick={handleLogout}>Log Out</button>
+              </li>
+              <li className="nav-item">
+                <Link to="/home">Home</Link>
+              </li>
+              <li className="nav-item">
+                <Link to={`/profile/${user.id}`}>Profile</Link>
+              </li>
+            </>
+          ) : (
+            <li className="nav-item">
+              <Link to="/">Login</Link>
+            </li>
+          )}
+        </ul>
+      </div>
+    </nav>
+  );
+};
 
 export default Header;

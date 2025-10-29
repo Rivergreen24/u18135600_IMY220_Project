@@ -1,64 +1,46 @@
-import React from "react";
-import { Link } from "react-router";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
-import { useParams } from "react-router-dom";
-import CreateProject from "../components/CreateProject";
 import ProfileComp from "../components/ProfileComp";
-import Friends from "../components/Friends";
-import EditProfile from "../components/EditProfile";
 import UserProjects from "../components/UserProjects";
+import EditProfile from "../components/EditProfile";
+import Friends from "../components/Friends";
+import CreateProject from "../components/CreateProject";
 
-function Profile() {
-    const { id } = useParams(); // gets whatever comes after /profile/
+const Profile = () => {
+  const [user, setUser] = useState(null);
 
-    // Dummy data varying slightly by id (for Fix l)
-    const dummyProfiles = {
-        '1': { name: 'User One', bio: 'Bio for user 1' },
-        '2': { name: 'User Two', bio: 'Bio for user 2' }
-    };
-    const profileData = dummyProfiles[id] || dummyProfiles['1']; // Default to 1 if id not found
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (!storedUser) {
+      window.location.href = "/"; // redirect if not logged in
+      return;
+    }
+    setUser(JSON.parse(storedUser));
+  }, []);
 
-    console.log(`Profile ID: ${id}`);
-    const dummyProjects = [
-        { title: `Project1 for ${profileData.name}`, description: 'Project1 desc', contributors: [profileData.name] },
-        { title: `Project2 for ${profileData.name}`, description: 'Project2 desc', contributors: [profileData.name,"David"] },
-    ];
+  if (!user) return null;
 
-    const dummyFriends = [
-        { name: 'Jason', bio: 'Friend bio 1' },
-        { name: 'Erik', bio: 'Friend bio 2' }   
-    ];
+  const dummyProjects = [
+    { title: `Project1 for ${user.username}`, description: 'Project1 desc', contributors: [user.username] },
+    { title: `Project2 for ${user.username}`, description: 'Project2 desc', contributors: [user.username,"David"] },
+  ];
 
-    return (
-        <div className="profile-container">
+  const dummyFriends = [
+    { name: 'Jason', bio: 'Friend bio 1' },
+    { name: 'Erik', bio: 'Friend bio 2' }   
+  ];
 
-            <h2 className="page-title">Profile Page</h2>
-
-                      <Header />  
-            <h3 className="profile-id">Profile for user {id}</h3>
-
-            <section className="profile-section">
-                <ProfileComp profileData={profileData} />
-            </section>
-
-            <section className="profile-section">
-                <EditProfile />
-            </section>
-
-            <section className="profile-section">
-                <UserProjects projects={dummyProjects} />
-            </section>
-
-            <section className="profile-section">
-                <Friends friends={dummyFriends} />
-            </section>
-
-            <section className="profile-section">
-                <CreateProject />
-            </section>
-        </div>
-
-    );
-}
+  return (
+    <div className="profile-container">
+      <h2 className="page-title">Profile Page</h2>
+      <Header />
+      <ProfileComp profileData={user} />
+      <EditProfile />
+      <UserProjects projects={dummyProjects} />
+      <Friends friends={dummyFriends} />
+      <CreateProject />
+    </div>
+  );
+};
 
 export default Profile;
