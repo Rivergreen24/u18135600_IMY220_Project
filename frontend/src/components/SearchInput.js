@@ -113,28 +113,27 @@ const SearchInput = ({ currentUserId }) => {
       {results.length > 0 && (
         <div className="search-results">
           {results.map((item) => (
-            <div
+            <Link
               key={item.type === "project" ? item.projectId : item.userId}
-              className="search-result-card"
+              to={item.type === "project" ? `/project/${item.projectId}` : `/profile/${item.userId}`}
+              className="search-result-link"
             >
-              {item.type === "project" ? (
-                <>
-                  <Link to={`/project/${item.projectId}`} className="feed-link">
+              <div className="search-result-card">
+                {item.type === "project" ? (
+                  <>
                     <h4>{item.name}</h4>
-                  </Link>
-                  <p className="search-meta">
-                    by <Link to={`/profile/${item.owner}`} className="link">@{item.owner}</Link>
-                  </p>
-                </>
-              ) : (
-                <>
-                  <Link to={`/profile/${item.userId}`} className="feed-link">
-                    <h4>@{item.username}</h4>
-                  </Link>
-                  <p className="search-meta">{item.bio || "No bio"}</p>
-                </>
-              )}
-            </div>
+                    <p className="search-meta">
+                      by <span className="link">@{item.owner}</span>
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <h4>{item.username}</h4>
+                    <p className="search-meta">{item.bio || "No bio"}</p>
+                  </>
+                )}
+              </div>
+            </Link>
           ))}
         </div>
       )}
