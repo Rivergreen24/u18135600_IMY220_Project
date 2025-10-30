@@ -38,7 +38,7 @@
 
 .splash-tagline {
   font-family: 'Brawler', serif;
-  font-size: 2rem;
+  font-size: 4rem;
   margin: 0 0 1.5rem;
   opacity: 0.95;
   animation: fadeInUp 1s ease-out 0.2s both;
