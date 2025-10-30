@@ -652,4 +652,4 @@ eval("{\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleEle
 /******/ 	var __webpack_exports__ = __webpack_require__("./frontend/src/index.js");
 /******/ 	
 /******/ })()
-;                          
+;
