@@ -66,6 +66,11 @@
   justify-content: space-between;
   margin: 0.8rem 0;
   color: #e6d698;
+  font-family: 'Roboto', sans-serif;
+}
+
+.info-card p *{
+  font-family: 'Roboto', sans-serif;
 }
 
 .info-card strong {
@@ -130,7 +135,8 @@
   border-radius: 10px;
   margin: 0.5rem 0;
   border-left: 4px solid #041c28;
-  font-family: 'Brawler', serif;;
+  font-family: 'Brawler', serif;
+  ;
 }
 
 .edit-section {
@@ -141,7 +147,35 @@
   padding: 0 1rem;
 }
 
-.edit-section > * {
+.edit-section>* {
   width: 100%;
   max-width: 600px;
+}
+
+.remove-btn,
+.add-btn {
+  background: transparent;
+  border: 1px solid #e6d698;
+  color: #e6d698;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.3rem;
+  transition: all 0.2s ease;
+}
+
+.add-btn{
+  width: 50px;
+  height: 50px;
+}
+
+.remove-btn:hover,
+.add-btn:hover {
+  background: #e6d698;
+  color: #041c28;
 }

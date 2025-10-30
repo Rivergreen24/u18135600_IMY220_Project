@@ -214,7 +214,7 @@ const Project = () => {
               )}
               {isMember && (
                 <button onClick={handleAddMember} className="add-btn">
-                  + Add Friend
+                  Add
                 </button>
               )}
             </p>
