@@ -1,91 +1,118 @@
-/* Splash Page Container */
-.splash-page {
-  min-height: 100vh;
+/* ───────────────────────────────────────
+   PARALLAX SPLASH – SMOOTH & MODERN
+   ─────────────────────────────────────── */
+.splash-wrapper {
+  position: relative;
+  min-height: 200vh; /* Enough scroll space */
+  overflow: hidden;
+  background: #041c28;
+}
+
+/* PARALLAX BACKGROUND */
+.parallax-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, #447c93, #041c28);
+  background-attachment: fixed;
+  background-size: cover;
+  z-index: -1;
+  transform: translateZ(0); /* Force GPU */
+}
+
+/* HERO SECTION */
+.splash-hero {
+  position: relative;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #447c93, #041c28);
-  font-family: 'Roboto', sans-serif;
-  color: #041c28;
-  padding: 20px;
+  text-align: center;
+  padding: 2rem;
+  color: #e6d698;
 }
 
-/* Splash Title */
 .splash-title {
   font-family: 'Brawler', serif;
-  font-size: 3rem;
-  color: #e6d698;
-  margin-bottom: 30px;
+  font-size: 5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  animation: fadeInUp 1s ease-out;
 }
 
-/* Login & Signup Forms Container */
-.auth-forms {
+.splash-tagline {
+  font-family: 'Brawler', serif;
+  font-size: 2rem;
+  margin: 0 0 1.5rem;
+  opacity: 0.95;
+  animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.splash-info {
+  max-width: 700px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  background: rgba(230, 214, 152, 0.15);
+  padding: 1.5rem 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(230, 214, 152, 0.3);
+  backdrop-filter: blur(6px);
+  animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+/* AUTH SECTION */
+.splash-auth {
+  position: relative;
+  min-height: 100vh;
   display: flex;
-  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  background: rgba(4, 28, 40, 0.7);
+}
+
+.auth-container {
+  display: flex;
+  gap: 3rem;
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 900px;
+  animation: fadeInUp 1s ease-out 0.6s both;
 }
 
-/* Individual Forms */
+/* ANIMATIONS */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .splash-title { font-size: 3.5rem; }
+  .splash-tagline { font-size: 1.6rem; }
+  .splash-info { font-size: 1.1rem; padding: 1.2rem; }
+}
+
 form {
-  background: rgba(230, 214, 152, 0.25); /* semi-transparent secondary */
-  padding: 20px 25px;
-  border-radius: 12px;
-  min-width: 280px;
-  max-width: 320px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  background: rgba(230, 214, 152, 0.25);
+  backdrop-filter: blur(8px);
+  padding: 2rem;
+  border-radius: 16px;
+  min-width: 300px;
+  max-width: 360px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(230, 214, 152, 0.4);
 }
 
-/* Form Headings */
-form h2 {
-  font-family: 'Brawler', serif;
-  color: #041c28;
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-/* Labels & Inputs */
-label {
-  display: block;
-  margin-bottom: 12px;
-  font-size: 0.95rem;
-  color: #041c28;
-}
-
-input {
-  width: 100%;
-  padding: 8px 10px;
-  margin-top: 4px;
-  border: 1px solid #041c28;
-  border-radius: 6px;
-  font-family: 'Roboto', sans-serif;
-}
-
-/* Error messages */
-form p {
-  color: red;
-  font-size: 0.85rem;
-  margin-top: -6px;
-  margin-bottom: 10px;
-}
-
-/* Submit Button */
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #e6d698; /* secondary */
-  border: none;
-  border-radius: 6px;
-  font-family: 'Brawler', serif;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-
+form h2 { font-family: 'Brawler', serif; color: #041c28; text-align: center; margin-bottom: 1.2rem; }
+input { width: 100%; padding: 0.75rem; margin-top: 0.5rem; border: 2px solid #e6d698; border-radius: 10px; background: rgba(255,255,255,0.9); }
+button { width: 100%; padding: 0.9rem; background: #e6d698; color: #041c28; border: none; border-radius: 10px; font-family: 'Brawler', serif; font-weight: 600; }
+button:hover { background: #d4c37a; transform: translateY(-2px); }

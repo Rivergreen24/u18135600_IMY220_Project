@@ -170,4 +170,219 @@ var projectRoutes = exports.projectRoutes = function projectRoutes(app, db) {
       return _ref4.apply(this, arguments);
     };
   }());
+  app["delete"]("/api/projects/:id/members", /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5(req, res) {
+      var userId, result, _t5;
+      return _regenerator().w(function (_context5) {
+        while (1) switch (_context5.p = _context5.n) {
+          case 0:
+            _context5.p = 0;
+            userId = req.body.userId;
+            if (userId) {
+              _context5.n = 1;
+              break;
+            }
+            return _context5.a(2, res.status(400).json({
+              error: "userId is required"
+            }));
+          case 1:
+            _context5.n = 2;
+            return db.collection("projects").findOneAndUpdate({
+              projectId: req.params.id
+            }, {
+              $pull: {
+                members: userId
+              }
+            }, {
+              returnDocument: "after"
+            });
+          case 2:
+            result = _context5.v;
+            // if (!result.value) {
+            //   return res.status(404).json({ error: "Project not found" });
+            // }
+
+            res.json(result.value); // always valid JSON
+            _context5.n = 4;
+            break;
+          case 3:
+            _context5.p = 3;
+            _t5 = _context5.v;
+            res.status(500).json({
+              error: _t5.message
+            });
+          case 4:
+            return _context5.a(2);
+        }
+      }, _callee5, null, [[0, 3]]);
+    }));
+    return function (_x9, _x0) {
+      return _ref5.apply(this, arguments);
+    };
+  }());
+  app.post("/api/projects/:id/members", /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6(req, res) {
+      var userId, result;
+      return _regenerator().w(function (_context6) {
+        while (1) switch (_context6.n) {
+          case 0:
+            userId = req.body.userId;
+            _context6.n = 1;
+            return db.collection("projects").findOneAndUpdate({
+              projectId: req.params.id
+            }, {
+              $addToSet: {
+                members: userId
+              }
+            }, {
+              returnDocument: "after"
+            });
+          case 1:
+            result = _context6.v;
+            res.json(result.value);
+          case 2:
+            return _context6.a(2);
+        }
+      }, _callee6);
+    }));
+    return function (_x1, _x10) {
+      return _ref6.apply(this, arguments);
+    };
+  }());
+  app.put("/api/projects/:id/owner", /*#__PURE__*/function () {
+    var _ref7 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7(req, res) {
+      var newOwnerId, result;
+      return _regenerator().w(function (_context7) {
+        while (1) switch (_context7.n) {
+          case 0:
+            newOwnerId = req.body.newOwnerId;
+            _context7.n = 1;
+            return db.collection("projects").findOneAndUpdate({
+              projectId: req.params.id
+            }, {
+              $set: {
+                owner: newOwnerId
+              }
+            }, {
+              returnDocument: "after"
+            });
+          case 1:
+            result = _context7.v;
+            res.json(result.value);
+          case 2:
+            return _context7.a(2);
+        }
+      }, _callee7);
+    }));
+    return function (_x11, _x12) {
+      return _ref7.apply(this, arguments);
+    };
+  }());
+
+  // Delete project
+  app["delete"]("/api/projects/:id", /*#__PURE__*/function () {
+    var _ref8 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee8(req, res) {
+      return _regenerator().w(function (_context8) {
+        while (1) switch (_context8.n) {
+          case 0:
+            _context8.n = 1;
+            return db.collection("projects").deleteOne({
+              projectId: req.params.id
+            });
+          case 1:
+            res.json({
+              success: true
+            });
+          case 2:
+            return _context8.a(2);
+        }
+      }, _callee8);
+    }));
+    return function (_x13, _x14) {
+      return _ref8.apply(this, arguments);
+    };
+  }());
+  app.get("/api/projects/search", /*#__PURE__*/function () {
+    var _ref9 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee9(req, res) {
+      var q, projects, _t6;
+      return _regenerator().w(function (_context9) {
+        while (1) switch (_context9.p = _context9.n) {
+          case 0:
+            q = (req.query.q || "").trim();
+            if (q) {
+              _context9.n = 1;
+              break;
+            }
+            return _context9.a(2, res.json([]));
+          case 1:
+            _context9.p = 1;
+            _context9.n = 2;
+            return db.collection("projects").find({
+              name: {
+                $regex: q,
+                $options: "i"
+              } // Only name
+            }).limit(10).toArray();
+          case 2:
+            projects = _context9.v;
+            res.json(projects);
+            _context9.n = 4;
+            break;
+          case 3:
+            _context9.p = 3;
+            _t6 = _context9.v;
+            console.error("Project search error:", _t6);
+            res.status(500).json({
+              error: "Search failed"
+            });
+          case 4:
+            return _context9.a(2);
+        }
+      }, _callee9, null, [[1, 3]]);
+    }));
+    return function (_x15, _x16) {
+      return _ref9.apply(this, arguments);
+    };
+  }());
+
+  // SEARCH USERS
+  app.get("/api/users/search", /*#__PURE__*/function () {
+    var _ref0 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee0(req, res) {
+      var q, users;
+      return _regenerator().w(function (_context0) {
+        while (1) switch (_context0.n) {
+          case 0:
+            q = (req.query.q || "").trim();
+            if (q) {
+              _context0.n = 1;
+              break;
+            }
+            return _context0.a(2, res.json([]));
+          case 1:
+            _context0.n = 2;
+            return db.collection("users").find({
+              $or: [{
+                username: {
+                  $regex: q,
+                  $options: "i"
+                }
+              }, {
+                bio: {
+                  $regex: q,
+                  $options: "i"
+                }
+              }]
+            }).limit(10).toArray();
+          case 2:
+            users = _context0.v;
+            res.json(users);
+          case 3:
+            return _context0.a(2);
+        }
+      }, _callee0);
+    }));
+    return function (_x17, _x18) {
+      return _ref0.apply(this, arguments);
+    };
+  }());
 };

@@ -72,7 +72,7 @@ const LoginForm = () => {
                 />
             </label>
             {error && <p style={{ color: "red" }}>{error}</p>}
-            <button type="submit">Login</button>
+            <button className="splash-button" type="submit">Login</button>
         </form>
     );
 };

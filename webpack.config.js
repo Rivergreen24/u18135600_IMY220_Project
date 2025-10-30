@@ -19,7 +19,8 @@ module.exports = {
             {
                 test: /\.css$/,  // New: Basic CSS handling
                 use: ['style-loader', 'css-loader']  // Injects and parses CSS
-            }
+            },
+            
         ]
     }
 }

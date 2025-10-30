@@ -1,48 +1,126 @@
-/* Header.css - Specific to Header component */
-
-/* Import global variables if needed (optional - for reuse) */
-/* Pulls in your base colors/font - keeps theme consistent */
-
-/* Header-specific styles (gold nav theme - meets s) */
-.header-nav {
-  background-color: #e6d698;  /* Secondary gold for navbar */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
-  position: sticky;  /* Sticks to top on scroll - improves layout flow */
+/* HEADER - GLASS BAR */
+.app-header {
+  background: rgba(4, 28, 40, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(230, 214, 152, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 1000;
+  font-family: 'Roboto', sans-serif;
 }
 
-.nav-list {
-  display: flex;  /* Horizontal layout - meets t */
-  justify-content: flex-end;  /* Right-align links for clean look */
-  list-style: none;  /* No bullets */
-  gap: 2rem;  /* Spacing between items */
-  padding: 1rem 0;  /* Vertical padding for breathing room */
-  margin: 0;  /* Reset default margin */
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  height: 70px;
 }
 
-.nav-item {
-  margin: 0;  /* No extra spacing on items */
+/* LOGO */
+.header-logo {
+  font-family: 'Brawler', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #e6d698;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.header-logo img {
+  height: 36px;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+}
+
+.header-logo:hover {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(230, 214, 152, 0.6);
+}
+
+/* NAVIGATION */
+.header-nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
 }
 
 .nav-link {
-  color: #041c28;  /* Primary navy text - meets s */
-  text-decoration: none;  /* No underline */
-  font-weight: 500;  /* Medium weight (inherits Roboto from global) */
-  padding: 0.5rem 1rem;  /* Touch-friendly padding */
-  border-radius: 4px;  /* Subtle rounding */
-  transition: color 0.3s ease, background-color 0.3s ease;  /* Smooth hover */
+  color: #e6d698;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 4px;
+  left: 50%;
+  background: #e6d698;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
 
 .nav-link:hover {
-  color: #447c93;  /* Primary teal on hover - meets s */
-  background-color: rgba(68, 124, 147, 0.1);  /* Light teal tint for highlight */
+  color: #fff;
+  background: rgba(230, 214, 152, 0.15);
 }
 
-h1, h2 {
-  font-family: 'Brawler', serif;
+.nav-link:hover::after {
+  width: 80%;
 }
 
-p {
-  font-family: 'Roboto', sans-serif;
+/* LOGOUT BUTTON */
+.nav-btn {
+  background: transparent;
+  color: #e6d698;
+  border: 1.8px solid #e6d698;
+  padding: 0.5rem 1.3rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.nav-btn:hover {
+  background: #e6d698;
+  color: #041c28;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(230, 214, 152, 0.4);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0 1rem;
+    height: 60px;
+  }
+  .header-logo {
+    font-size: 1.6rem;
+  }
+  .header-nav {
+    gap: 1rem;
+  }
+  .nav-link {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+  .nav-btn {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+  }
 }

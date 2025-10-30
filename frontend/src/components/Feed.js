@@ -1,25 +1,35 @@
+// components/Feed.jsx
 import React from "react";
-import ProjectPreview from "./ProjectPreview";
+import { Link } from "react-router-dom";
 
 const Feed = ({ projects }) => {
-  if (!projects || projects.length === 0) {
-    return (
-      <section className="feed">
-        <h2>Feed</h2>
-        <p>No projects to display.</p>
-      </section>
-    );
-  }
+  if (!projects.length) return <p>No projects to show.</p>;
 
   return (
-    <section className="feed">
-      <h2>Feed</h2>
-      <div className="feed-grid">
-        {projects.map((proj) => (
-          <ProjectPreview key={proj._id || proj.id} project={proj} />
-        ))}
-      </div>
-    </section>
+    <div className="feed-container">
+      {projects.map((p) => (
+        <div key={p.projectId} className="feed-card">
+          <Link to={`/project/${p.projectId}`} className="feed-link">
+            <h3>{p.name}</h3>
+          </Link>
+          <p>{p.description}</p>
+          <div className="feed-meta">
+            <span>Owner: {p.ownerName}</span>
+            <span>Type: {p.type || "N/A"}</span>
+            <span>Version: {p.version || "1.0"}</span>
+          </div>
+          {p.hashtags?.length > 0 && (
+            <div className="hashtags">
+              {p.hashtags.map((tag, i) => (
+                <span key={i} className="hashtag">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
   );
 };
 

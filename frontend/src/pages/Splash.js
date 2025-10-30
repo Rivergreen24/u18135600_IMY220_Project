@@ -1,28 +1,37 @@
+
 import React, { useEffect } from "react";
-import { Link } from "react-router";
-import Header from "../components/Header";
 import LoginForm from "../components/LoginForm";
 import SignUpForm from "../components/SignUpForm";
-
-//get the login and signup comps
 
 const Splash = () => {
   useEffect(() => {
     const user = localStorage.getItem("user");
-    // if (user) {
-    //   // User already logged in, redirect to Home
-    //   window.location.href = "/home";
-    // }
+    // if (user) window.location.href = "/home";
   }, []);
-    return (
-        <div className="splash-page">
-            <h1 className="splash-title">Welcome to ALYXX</h1>
-            <div className="auth-forms">
-                <LoginForm />
-                <SignUpForm />
-            </div>
+
+  return (
+    <div className="splash-wrapper">
+      {/* PARALLAX BACKGROUND */}
+      <div className="parallax-bg"></div>
+
+      {/* HERO SECTION */}
+      <section className="splash-hero">
+        <p className="splash-tagline">Code. Commit. Control.</p>
+        <p className="splash-info">
+          Whether you're a <strong>solo developer</strong> or a <strong>large team</strong>, 
+          ALYXX makes code versioning <strong>simple</strong> and <strong>reliable</strong>.
+        </p>
+      </section>
+
+      {/* AUTH SECTION */}
+      <section className="splash-auth">
+        <div className="auth-container">
+          <LoginForm />
+          <SignUpForm />
         </div>
-    )
-}
+      </section>
+    </div>
+  );
+};
 
 export default Splash;

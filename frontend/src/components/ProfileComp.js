@@ -6,14 +6,21 @@ const ProfileComp = ({ profileData }) => {
 
   return (
     <article className="profile-main-card">
-            <img
+      <img
         src={profileData.profileImage || "/images/placeholder.png"}
         alt={`${profileData.username}'s avatar`}
         className="profile-main-avatar"
       />
-      <h2>{profileData.username}'s Profile</h2>
-      <p><strong>Bio:</strong> {profileData.bio || "No bio available"}</p>
-      <p><strong>Email:</strong> {profileData.email}</p>
+
+      <div className="profile-info">
+        <h3 className="profile-username">{profileData.username}</h3>
+        <p className="profile-bio">
+          <strong>Bio:</strong> {profileData.bio || "No bio available"}
+        </p>
+        <p className="profile-email">
+          <strong>Email:</strong> {profileData.email}
+        </p>
+      </div>
     </article>
   );
 };

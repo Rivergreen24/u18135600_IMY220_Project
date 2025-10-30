@@ -81,21 +81,21 @@ const Profile = () => {
 
   const handleSave = async () => {
     try {
-        console.log("ahoy");
-        
+      console.log("ahoy");
+
       const res = await fetch(`/api/users/${userId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-                console.log("Response status:", res.status);
+      console.log("Response status:", res.status);
       if (!res.ok) throw new Error("Failed to update profile");
 
       const updatedUser = await res.json();
       setUser(updatedUser);
 
       localStorage.setItem("user", JSON.stringify(updatedUser));
-      setEditing(false);    
+      setEditing(false);
     } catch (err) {
       console.log(err.message);
     }
@@ -106,51 +106,55 @@ const Profile = () => {
   if (!user) return <p>No user found.</p>;
 
   return (
-    <div className="profile-container">
+    <>
       <Header />
-      <h2 className="page-title">{user.username}'s Profile</h2>
-      <ProfileComp profileData={user} />
+      <div className="profile-container">
 
-      {isOwnProfile && !editing && (
-        <button onClick={handleEditClick} className="edit-btn">
-          Edit Profile
-        </button>
-      )}
+        <h2 className="page-title">{user.username}'s Profile</h2>
+        <ProfileComp profileData={user} />
 
-      {editing && (
-        <div className="edit-form">
-          <h3>Edit Profile</h3>
-          <label>
-            Username:
-            <input
-              type="text"
-              value={formData.username}
-              onChange={(e) =>
-                setFormData({ ...formData, username: e.target.value })
-              }
-            />
-          </label>
+        {isOwnProfile && !editing && (
+          <button onClick={handleEditClick} className="edit-btn">
+            Edit Profile
+          </button>
+        )}
 
-          <label>
-            Bio:
-            <textarea
-              value={formData.bio}
-              onChange={(e) =>
-                setFormData({ ...formData, bio: e.target.value })
-              }
-            />
-          </label>
+        {editing && (
+          <div className="edit-form">
+            <h3>Edit Profile</h3>
+            <label>
+              Username:
+              <input
+                type="text"
+                value={formData.username}
+                onChange={(e) =>
+                  setFormData({ ...formData, username: e.target.value })
+                }
+              />
+            </label>
 
-          <div className="edit-buttons">
-            <button onClick={handleSave}>Save</button>
-            <button onClick={handleCancel}>Cancel</button>
+            <label>
+              Bio:
+              <textarea
+                value={formData.bio}
+                onChange={(e) =>
+                  setFormData({ ...formData, bio: e.target.value })
+                }
+              />
+            </label>
+
+            <div className="edit-buttons">
+              <button onClick={handleSave}>Save</button>
+              <button onClick={handleCancel}>Cancel</button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <Friends friends={friends} />
-      <UserProjects projects={projects} />
-    </div>
+        <Friends friends={friends} />
+        <UserProjects projects={projects} />
+      </div>
+    </>
+
   );
 };
 

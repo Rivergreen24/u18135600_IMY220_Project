@@ -1,51 +1,60 @@
-/* Feed Section */
-.feed {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.feed h2 {
-  font-family: 'Brawler', serif;
-  font-size: 2rem;
-  color: #e6d698; /* secondary highlight */
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-.feed-grid {
+.feed-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  padding: 0 1rem;
 }
 
-/* ProjectPreview Card */
-.project-card {
-  background-color: #e6d698;       /* secondary colour for card */
-  color: #0a374e;                  /* dark primary for text */
-  border-radius: 12px;
-  padding: 15px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  transition: transform 0.2s, box-shadow 0.2s;
+.feed-card {
+  background: rgba(230, 214, 152, 0.15);
+  border: 1px solid rgba(230, 214, 152, 0.3);
+  border-radius: 14px;
+  padding: 1.4rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.25s ease;
+  backdrop-filter: blur(6px);
 }
 
-.project-card:hover {
+.feed-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  border-color: #e6d698;
 }
 
-.project-card h3 {
+.feed-link {
+  color: #e6d698;
+  font-weight: 600;
+  font-size: 1.2rem;
+  display: block;
+  margin-bottom: 0.5rem;
   font-family: 'Brawler', serif;
-  margin: 0 0 10px;
-  font-size: 1.4rem;
 }
 
-.project-card p {
-  font-family: 'Roboto', sans-serif;
-  margin: 0 0 8px;
+.feed-link:hover {
+  color: #fff;
 }
 
-.project-card .contributors {
+.feed-meta {
   font-size: 0.9rem;
-  font-style: italic;
+  color: #e6d698;
+  opacity: 0.9;
+  margin-top: 0.8rem;
+}
+
+.hashtags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.hashtag {
+  background: rgba(230, 214, 152, 0.3);
+  color: #041c28;
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 20px;
+  border: 1px solid rgba(230, 214, 152, 0.5);
 }

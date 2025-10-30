@@ -1,4 +1,4 @@
-/* Base reset (overrides HTML defaults - meets q/r) */
+/* Base reset */
 * {
   margin: 0;
   padding: 0;
@@ -6,132 +6,68 @@
 }
 
 html, body {
-  font-family: 'Roboto', sans-serif;  /* Custom font - meets q/r */
+  font-family: 'Roboto', sans-serif;
   line-height: 1.6;
-  color: #82a6b8;  /* Primary navy text - meets s */
-  background: linear-gradient(135deg, #447c93, #041c28);    /* Light neutral bg for contrast */
+  color: #e6d698;
+  background: linear-gradient(135deg, #26586b, #041c28);
+  min-height: 100vh;
 }
 
-/* Global layout (consistent padding/max-width - meets t) */
+/* Global layout */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
-/* Semantic overrides (theme consistency - meets t) */
-nav {
-  background-color: #e6d698;  /* Secondary gold for nav - meets s */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);  /* Subtle depth */
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-  padding: 1rem 0;
-}
-
-nav a {
-  color: #041c28;  /* Primary navy links - meets s */
+/* Links */
+a {
+  color: #e6d698;
   text-decoration: none;
-  font-weight: 500;  /* Medium weight for readability */
-  transition: color 0.3s ease;  /* Smooth hover */
+  transition: color 0.2s;
 }
 
-nav a:hover {
-  color: #447c93;  /* Primary teal on hover - meets s */
+a:hover {
+  color: #fff;
 }
 
-main {
-  padding: 2rem 0;  /* Consistent spacing - meets t */
-}
-
-article {
-  background: white;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);  /* Clean card look - meets t */
-  border-left: 4px solid #447c93;  /* Teal accent border - meets s */
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 400px;
-  margin: 1rem 0;
-}
-
-input, textarea, button {
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-family: 'Roboto', sans-serif;  /* Custom font - meets q/r */
-}
-
+/* Buttons */
 button {
-  background-color: #447c93;  /* Primary teal buttons - meets s */
-  color: white;
-  font-weight: 500;
+  font-family: 'Brawler', serif;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.2s;
 }
 
-button:hover {
-  background-color: #041c28;  /* Navy on hover - meets s */
-}
-
-.error {
-  color: #d32f2f;  /* Red for errors, but ties to navy theme */
-  font-size: 0.875rem;
-}
-
-/* Component helpers (add more per component - meets t) */
-.project-preview, .profile-preview {
-  border-left-color: #e6d698;  /* Gold accent for previews - meets s */
-}
-
-.app-title {
-    background-color: #e6d698;   /* secondary colour */
-    color: #041c28;              /* text colour for contrast */
-    padding: 0.5rem 1rem;        /* some spacing */
-    display: inline-block;       /* shrink to content width */
-    border-radius: 0.25rem;      /* optional rounded corners */
-    font-family: 'Poppins', sans-serif;
-}
-
-.app-title {
-    background-color: #e6d698;   /* secondary colour */
-    color: #041c28;               /* text colour for contrast */
-    padding: 1rem 0;              /* vertical padding, full width */
-    width: 100%;                  /* span full width */
-    font-family: 'Poppins', sans-serif;
-    font-size: 2.5rem;            /* bigger title */
-    margin: 0;                    /* remove default margins */
-}
-
-/* Search Input */
-.search-container {
-  text-align: center;
-  margin: 20px 0;
-}
-
-.search-input {
-  width: 60%;
-  max-width: 500px;
-  padding: 10px 15px;
-  border: 2px solid #e6d698;
-  border-radius: 25px;
-  font-size: 1rem;
+/* Forms */
+input, textarea, select {
   font-family: 'Roboto', sans-serif;
-  outline: none;
-  transition: 0.3s;
-  background-color: #b3a984;
 }
 
-.search-input:focus {
-  border-color: #447c93; /* light primary */
-  box-shadow: 0 0 8px rgba(68, 124, 147, 0.5);
+/* Utility */
+.link {
+  color: #e6d698;
+  font-weight: 600;
+}
+
+.link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.Logo{
+  max-width: 150px;
+  max-height: 150px;
+}
+
+h1{
+  font-family: 'IBM Plex Serif', serif;
+  font-size: 7rem;
+}
+
+.app-title{
+  display: flex;
+}
+
+.splash-button{
+  margin-top: 10px;
 }

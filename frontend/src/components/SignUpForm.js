@@ -61,7 +61,7 @@ const SignUpForm = () => {
             <label>Password: <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /></label>
             <label>Confirm Password: <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}  /></label>
             {error && <p>{error}</p>}
-            <button type="submit">Sign Up</button>
+            <button className="splash-button" type="submit">Sign Up</button>
         </form>
     );
 }

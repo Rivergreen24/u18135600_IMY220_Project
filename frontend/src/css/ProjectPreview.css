@@ -1,0 +1,98 @@
+
+.project-card {
+  background: rgba(230, 214, 152, 0.15);          /* Soft gold glass */
+  border: 1px solid rgba(230, 214, 152, 0.35);
+  border-radius: 14px;
+  padding: 1.4rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(6px);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover Lift + Glow */
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
+  border-color: #e6d698;
+}
+
+/* Subtle inner glow on hover */
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(230,214,152,0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  border-radius: 14px;
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+/* Title */
+.project-card h3 {
+  font-family: 'Brawler', serif;
+  font-size: 1.35rem;
+  color: #e6d698;
+  margin: 0 0 0.6rem;
+  font-weight: 600;
+}
+
+/* Description */
+.project-card p {
+  font-family: 'Roboto', sans-serif;
+  color: #e6d698;
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.92;
+}
+
+/* Strong labels */
+.project-card strong {
+  color: #fff;
+  font-weight: 600;
+  min-width: 110px;
+  display: inline-block;
+}
+
+/* Status Badge (optional enhancement) */
+.project-card p:last-child {
+  margin-top: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.project-card p:last-child::before {
+  content: "Status: ";
+  color: #fff;
+  font-weight: 600;
+}
+
+/* If you want a real badge */
+.status-inline {
+  display: inline-block;
+  background: rgba(4, 28, 40, 0.6);
+  color: #e6d698;
+  padding: 0.25rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid rgba(230, 214, 152, 0.4);
+  margin-left: 0.5rem;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 600px) {
+  .project-card {
+    padding: 1.2rem;
+  }
+  .project-card h3 {
+    font-size: 1.25rem;
+  }
+}
