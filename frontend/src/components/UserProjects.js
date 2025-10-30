@@ -1,13 +1,18 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import ProjectPreview from '../components/ProjectPreview';
-//add dummy code to do a map function
+
+
+
 const UserProjects = ({projects}) => {
   return (
     <section>
       <h2>User Projects</h2>
-      {projects.map((project, index) =>(
-        <ProjectPreview key={index} project={project}/>
-      ))}
+          {projects.map((p) => (
+      <Link to={`/project/${p.projectId}`} key={p.projectId}>
+        <ProjectPreview project={p} />
+      </Link>
+    ))}
     </section>
   );
 };

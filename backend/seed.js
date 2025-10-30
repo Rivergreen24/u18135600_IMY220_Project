@@ -1,46 +1,144 @@
-import { connectDB } from "./db.js";
-import { ObjectId } from "mongodb";
+import { MongoClient } from "mongodb";
 
-const seed = async () => {
-  const db = await connectDB();
+// Mongo URI
+const uri = "mongodb+srv://DTStevens:jhYNdUnCPHU6xQLn@imy220.r3kp7ip.mongodb.net/?retryWrites=true&w=majority&appName=IMY220";
+const client = new MongoClient(uri);
+let db;
 
-  const users = db.collection("users");
-  const projects = db.collection("projects");
-  const checkins = db.collection("checkins");
+async function connectAndSeed() {
+  try {
+    await client.connect();
+    db = client.db("simpledb3");
+    console.log("✅ MongoDB connected");
 
-  // Clear existing data
-  await users.deleteMany({});
-  await projects.deleteMany({});
-  await checkins.deleteMany({});
+    const usersColl = db.collection("users");
+    const projectsColl = db.collection("projects");
 
-  // Users
-  const insertedUsers = await users.insertMany([
-    { _id: new ObjectId(), name: "Alice", email: "alice@test.com", username: "alice123", bio: "Frontend dev", password: "password1" },
-    { _id: new ObjectId(), name: "Bob", email: "bob@test.com", username: "bob456", bio: "Backend dev", password: "password2" },
-  ]);
+    // Clear collections (optional, for fresh seed)
+    await usersColl.deleteMany({});
+    await projectsColl.deleteMany({});
 
-  // Access insertedIds properly
-  const aliceId = insertedUsers.insertedIds["0"];
-  const bobId = insertedUsers.insertedIds["1"];
+    // Seed users
+    const users = [
+      {
+        userId: "u001",
+        username: "alice",
+        email: "alice@test.com",
+        password: "Password1",
+        bio: "Frontend developer and designer",
+        profileImage: "/images/alice.jpg",
+        friends: ["u002", "u003"],
+        savedProjects: ["p002", "p003"],
+        createdProjects: ["p001"],
+        createdAt: new Date()
+      },
+      {
+        userId: "u002",
+        username: "bob",
+        email: "bob@test.com",
+        password: "Password2",
+        bio: "Backend enthusiast",
+        profileImage: "/images/bob.jpg",
+        friends: ["u001"],
+        savedProjects: ["p001"],
+        createdProjects: ["p002"],
+        createdAt: new Date()
+      },
+      {
+        userId: "u003",
+        username: "charlie",
+        email: "charlie@test.com",
+        password: "Password3",
+        bio: "Fullstack developer",
+        profileImage: "/images/charlie.jpg",
+        friends: ["u001"],
+        savedProjects: [],
+        createdProjects: ["p003"],
+        createdAt: new Date()
+      }
+    ];
 
-  // Projects
-  const insertedProjects = await projects.insertMany([
-    { _id: new ObjectId(), name: "Awesome Project", description: "This is Alice's project", ownerId: aliceId, members: [aliceId], hashtags: ["#frontend"], image: "" },
-    { _id: new ObjectId(), name: "Cool Project", description: "This is Bob's project", ownerId: bobId, members: [bobId], hashtags: ["#backend"], image: "" },
-  ]);
+    await usersColl.insertMany(users);
+    console.log("✅ Users seeded");
 
-  const project1Id = insertedProjects.insertedIds["0"];
-  const project2Id = insertedProjects.insertedIds["1"];
+    // Seed projects
+    const projects = [
+      {
+        projectId: "p001",
+        name: "Alpha",
+        description: "AI-based task tracker for students",
+        owner: "u001",
+        members: ["u001", "u002"],
+        hashtags: ["#ai", "#task", "#student"],
+        type: "Web App",
+        version: "1.0",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        image: "/images/projects/alpha.png",
+        status: "checked_in",
+        checkins: [
+          { user: "u001", message: "Initial commit", timestamp: new Date() },
+          { user: "u002", message: "Added login form", timestamp: new Date() }
+        ],
+        files: [
+          { name: "index.html", url: "/files/alpha/index.html" },
+          { name: "style.css", url: "/files/alpha/style.css" }
+        ],
+        discussion: [
+          { user: "u002", message: "Should we add a light mode?", timestamp: new Date() }
+        ]
+      },
+      {
+        projectId: "p002",
+        name: "Beta",
+        description: "Student project manager",
+        owner: "u002",
+        members: ["u002", "u001", "u003"],
+        hashtags: ["#manager", "#tasks", "#team"],
+        type: "Web App",
+        version: "1.0",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        image: "/images/projects/beta.png",
+        status: "checked_out",
+        checkins: [
+          { user: "u002", message: "Created base project", timestamp: new Date() },
+          { user: "u001", message: "UI tweaks", timestamp: new Date() }
+        ],
+        files: [
+          { name: "app.js", url: "/files/beta/app.js" }
+        ],
+        discussion: []
+      },
+      {
+        projectId: "p003",
+        name: "Gamma",
+        description: "Collaboration tool for developers",
+        owner: "u003",
+        members: ["u003", "u001"],
+        hashtags: ["#collab", "#dev", "#tools"],
+        type: "Web App",
+        version: "1.0",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        image: "/images/projects/gamma.png",
+        status: "checked_in",
+        checkins: [
+          { user: "u003", message: "Initial setup", timestamp: new Date() }
+        ],
+        files: [],
+        discussion: []
+      }
+    ];
 
-  // Check-ins
-  await checkins.insertMany([
-    { projectId: project1Id, message: "Initial commit", userId: aliceId, timestamp: new Date() },
-    { projectId: project1Id, message: "Added README", userId: bobId, timestamp: new Date() },
-    { projectId: project2Id, message: "Started backend setup", userId: bobId, timestamp: new Date() },
-  ]);
+    await projectsColl.insertMany(projects);
+    console.log("✅ Projects seeded");
 
-  console.log("Database seeded successfully!");
-  process.exit();
-};
+    return db; // optional if you need the db instance later
+  } catch (err) {
+    console.error("❌ Error seeding database:", err);
+    throw err;
+  }
+}
 
-seed();
+export { db, connectAndSeed };

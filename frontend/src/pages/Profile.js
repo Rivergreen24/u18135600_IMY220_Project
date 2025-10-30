@@ -1,44 +1,155 @@
+// pages/Profile.js
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Header from "../components/Header";
 import ProfileComp from "../components/ProfileComp";
 import UserProjects from "../components/UserProjects";
-import EditProfile from "../components/EditProfile";
 import Friends from "../components/Friends";
-import CreateProject from "../components/CreateProject";
 
 const Profile = () => {
+  const { id: userIdParam } = useParams();
   const [user, setUser] = useState(null);
+  const [friends, setFriends] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [editing, setEditing] = useState(false);
+  const [formData, setFormData] = useState({ username: "", bio: "" });
+
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const userId = userIdParam || storedUser?.userId;
+
+  const isOwnProfile = storedUser && storedUser.userId === userId;
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (!storedUser) {
-      window.location.href = "/"; // redirect if not logged in
+    if (!userId) {
+      window.location.href = "/";
       return;
     }
-    setUser(JSON.parse(storedUser));
-  }, []);
 
-  if (!user) return null;
+    const fetchUserData = async () => {
+      try {
+        const userRes = await fetch(`/api/users/${userId}`);
+        if (!userRes.ok) throw new Error("Failed to fetch user");
+        const userData = await userRes.json();
+        setUser(userData);
 
-  const dummyProjects = [
-    { title: `Project1 for ${user.username}`, description: 'Project1 desc', contributors: [user.username] },
-    { title: `Project2 for ${user.username}`, description: 'Project2 desc', contributors: [user.username,"David"] },
-  ];
+        // Pre-fill edit form
+        setFormData({ username: userData.username, bio: userData.bio || "" });
 
-  const dummyFriends = [
-    { name: 'Jason', bio: 'Friend bio 1' },
-    { name: 'Erik', bio: 'Friend bio 2' }   
-  ];
+        const allProjectsRes = await fetch(`/api/projects`);
+        if (!allProjectsRes.ok) throw new Error("Failed to fetch projects");
+        const allProjects = await allProjectsRes.json();
+
+        const userCreatedProjects = allProjects.filter(
+          (p) => p.owner === userData.userId
+        );
+        const userSavedProjects = allProjects.filter((p) =>
+          userData.savedProjects.includes(p.projectId)
+        );
+
+        setProjects([...userCreatedProjects, ...userSavedProjects]);
+
+        // Fetch friends
+        const friendsData = [];
+        for (let friendId of userData.friends) {
+          const friendRes = await fetch(`/api/users/${friendId}`);
+          if (friendRes.ok) {
+            const friend = await friendRes.json();
+            friendsData.push(friend);
+          }
+        }
+        setFriends(friendsData);
+      } catch (err) {
+        console.error(err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [userId]);
+
+  const handleEditClick = () => {
+    setEditing(true);
+  };
+
+  const handleCancel = () => {
+    setEditing(false);
+  };
+
+  const handleSave = async () => {
+    try {
+        console.log("ahoy");
+        
+      const res = await fetch(`/api/users/${userId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+                console.log("Response status:", res.status);
+      if (!res.ok) throw new Error("Failed to update profile");
+
+      const updatedUser = await res.json();
+      setUser(updatedUser);
+
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      setEditing(false);    
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  if (loading) return <p>Loading profile...</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if (!user) return <p>No user found.</p>;
 
   return (
     <div className="profile-container">
-      <h2 className="page-title">Profile Page</h2>
       <Header />
+      <h2 className="page-title">{user.username}'s Profile</h2>
       <ProfileComp profileData={user} />
-      <EditProfile />
-      <UserProjects projects={dummyProjects} />
-      <Friends friends={dummyFriends} />
-      <CreateProject />
+
+      {isOwnProfile && !editing && (
+        <button onClick={handleEditClick} className="edit-btn">
+          Edit Profile
+        </button>
+      )}
+
+      {editing && (
+        <div className="edit-form">
+          <h3>Edit Profile</h3>
+          <label>
+            Username:
+            <input
+              type="text"
+              value={formData.username}
+              onChange={(e) =>
+                setFormData({ ...formData, username: e.target.value })
+              }
+            />
+          </label>
+
+          <label>
+            Bio:
+            <textarea
+              value={formData.bio}
+              onChange={(e) =>
+                setFormData({ ...formData, bio: e.target.value })
+              }
+            />
+          </label>
+
+          <div className="edit-buttons">
+            <button onClick={handleSave}>Save</button>
+            <button onClick={handleCancel}>Cancel</button>
+          </div>
+        </div>
+      )}
+
+      <Friends friends={friends} />
+      <UserProjects projects={projects} />
     </div>
   );
 };

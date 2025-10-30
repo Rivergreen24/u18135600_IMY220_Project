@@ -33,9 +33,15 @@ const LoginForm = () => {
             const data = await response.json();
 
             if (data.success) {
-                // Store user info in localStorage
-                localStorage.setItem("user", JSON.stringify(data.user));
-                console.log("Login successful:", data.user);
+                // Store the user info including userId in localStorage
+                const userWithId = {
+                    userId: data.user.userId, // <- make sure backend returns this
+                    username: data.user.username,
+                    email: data.user.email
+                };
+                localStorage.setItem("user", JSON.stringify(userWithId));
+
+                console.log("Login successful:", userWithId);
                 navigate("/home");
             } else {
                 setError(data.message || "Invalid login");

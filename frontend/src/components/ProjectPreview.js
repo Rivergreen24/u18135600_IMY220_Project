@@ -5,13 +5,15 @@ const ProjectPreview = ({ project }) => {
   const contributors = project.checkins?.map(c => c.user) || [];
 
   return (
-    <article className="project-card">
+    <div className="project-card">
       <h3>{project.name}</h3>
       <p>{project.description}</p>
-      <p className="contributors">
-        Contributors: {contributors.length > 0 ? contributors.join(', ') : 'None'}
+      <p>
+        <strong>Contributors:</strong>{" "}
+        {project.members?.join(", ") || "No contributors"}
       </p>
-    </article>
+      <p><strong>Status:</strong> {project.status || "Unknown"}</p>
+    </div>
   );
 };
 

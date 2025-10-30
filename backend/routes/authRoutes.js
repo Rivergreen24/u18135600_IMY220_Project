@@ -1,5 +1,5 @@
-// routes/authRoutes.js
 export const authRoutes = (app, db) => {
+  // LOGIN
   app.post("/api/auth/login", async (req, res) => {
     try {
       const { email, password } = req.body;
@@ -10,13 +10,12 @@ export const authRoutes = (app, db) => {
           success: true,
           message: "Login successful",
           user: {
-            id: user._id,
+            userId: user.userId, // <-- include this
             username: user.username,
             email: user.email
           }
         });
         console.log(`${user.username} logged in`);
-        
       } else {
         res.status(401).json({ success: false, message: "Invalid credentials" });
       }
@@ -25,11 +24,14 @@ export const authRoutes = (app, db) => {
     }
   });
 
+  // SIGNUP
   app.post("/api/auth/signup", async (req, res) => {
     try {
       const { username, email, password } = req.body;
-      const result = await db.collection("users").insertOne({ username, email, password });
-      res.json({ user: { id: result.insertedId, username, email } });
+      // Generate a userId here (or let frontend provide one if you want)
+      const userId = `u${Date.now()}`; // simple unique id
+      const result = await db.collection("users").insertOne({ userId, username, email, password });
+      res.json({ user: { userId, username, email } });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }

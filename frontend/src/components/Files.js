@@ -1,15 +1,18 @@
 import React from 'react';
-//add dummy data
-const Files = ({files}) => {
+
+const Files = ({ files }) => {
+  if (!files || files.length === 0) return <p>No files</p>;
+
   return (
-    <section className="files-section">
-      <h3>Files</h3>
-      <ul className="files-list">
-        {files.map((file, index) => (
-          <li key={index} className="file-item">{file}</li>
-        ))}
-      </ul>
-    </section>
+    <ul>
+      {files.map((file, index) => (
+        <li key={index}>
+          <a href={file.url} target="_blank" rel="noreferrer">
+            {file.name}
+          </a>
+        </li>
+      ))}
+    </ul>
   );
 };
 

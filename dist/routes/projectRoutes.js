@@ -5,9 +5,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.projectRoutes = void 0;
-var _excluded = ["checkin"];
-function _objectWithoutProperties(e, t) { if (null == e) return {}; var o, r, i = _objectWithoutPropertiesLoose(e, t); if (Object.getOwnPropertySymbols) { var n = Object.getOwnPropertySymbols(e); for (r = 0; r < n.length; r++) o = n[r], -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]); } return i; }
-function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t = {}; for (var n in r) if ({}.hasOwnProperty.call(r, n)) { if (-1 !== e.indexOf(n)) continue; t[n] = r[n]; } return t; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -17,7 +14,6 @@ function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present,
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
-// routes/projectRoutes.js
 var projectRoutes = exports.projectRoutes = function projectRoutes(app, db) {
   // Get all projects
   app.get("/api/projects", /*#__PURE__*/function () {
@@ -50,124 +46,125 @@ var projectRoutes = exports.projectRoutes = function projectRoutes(app, db) {
     };
   }());
 
-  // Create a new project
-  app.post("/api/projects", /*#__PURE__*/function () {
+  // Get a single project by projectId
+  app.get("/api/projects/:id", /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(req, res) {
-      var project, result, _t2;
+      var projectId, project, _t2;
       return _regenerator().w(function (_context2) {
         while (1) switch (_context2.p = _context2.n) {
           case 0:
             _context2.p = 0;
-            project = _objectSpread(_objectSpread({}, req.body), {}, {
-              owner: "user1",
-              checkins: []
-            });
+            projectId = req.params.id;
             _context2.n = 1;
-            return db.collection("projects").insertOne(project);
-          case 1:
-            result = _context2.v;
-            res.json({
-              id: result.insertedId
+            return db.collection("projects").findOne({
+              projectId: projectId
             });
-            _context2.n = 3;
-            break;
+          case 1:
+            project = _context2.v;
+            if (project) {
+              _context2.n = 2;
+              break;
+            }
+            return _context2.a(2, res.status(404).json({
+              error: "Project not found"
+            }));
           case 2:
-            _context2.p = 2;
+            res.json(project);
+            _context2.n = 4;
+            break;
+          case 3:
+            _context2.p = 3;
             _t2 = _context2.v;
             res.status(500).json({
               error: _t2.message
             });
-          case 3:
+          case 4:
             return _context2.a(2);
         }
-      }, _callee2, null, [[0, 2]]);
+      }, _callee2, null, [[0, 3]]);
     }));
     return function (_x3, _x4) {
       return _ref2.apply(this, arguments);
     };
   }());
 
-  // Get a single project by ID
-  app.get("/api/projects/:id", /*#__PURE__*/function () {
+  // Create a new project
+  app.post("/api/projects", /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(req, res) {
-      var project, _t3;
+      var project, result, _t3;
       return _regenerator().w(function (_context3) {
         while (1) switch (_context3.p = _context3.n) {
           case 0:
             _context3.p = 0;
-            _context3.n = 1;
-            return db.collection("projects").findOne({
-              _id: req.params.id
+            project = _objectSpread(_objectSpread({}, req.body), {}, {
+              checkins: []
             });
+            _context3.n = 1;
+            return db.collection("projects").insertOne(project);
           case 1:
-            project = _context3.v;
-            if (project) {
-              _context3.n = 2;
-              break;
-            }
-            return _context3.a(2, res.status(404).json({
-              error: "Not found"
-            }));
-          case 2:
-            res.json(project);
-            _context3.n = 4;
+            result = _context3.v;
+            res.json({
+              projectId: project.projectId || result.insertedId
+            });
+            _context3.n = 3;
             break;
-          case 3:
-            _context3.p = 3;
+          case 2:
+            _context3.p = 2;
             _t3 = _context3.v;
             res.status(500).json({
               error: _t3.message
             });
-          case 4:
+          case 3:
             return _context3.a(2);
         }
-      }, _callee3, null, [[0, 3]]);
+      }, _callee3, null, [[0, 2]]);
     }));
     return function (_x5, _x6) {
       return _ref3.apply(this, arguments);
     };
   }());
 
-  // Update a project (including adding a checkin)
+  // Update project (PUT)
   app.put("/api/projects/:id", /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4(req, res) {
-      var _req$body, checkin, updateFields, updateQuery, _t4;
+      var projectId, update, updatedProject, _t4;
       return _regenerator().w(function (_context4) {
         while (1) switch (_context4.p = _context4.n) {
           case 0:
             _context4.p = 0;
-            _req$body = req.body, checkin = _req$body.checkin, updateFields = _objectWithoutProperties(_req$body, _excluded);
-            updateQuery = {
-              $set: updateFields
-            };
-            if (checkin) {
-              updateQuery.$push = {
-                checkins: _objectSpread(_objectSpread({}, checkin), {}, {
-                  user: "user1",
-                  timestamp: new Date()
-                })
-              };
-            }
+            projectId = req.params.id;
+            update = req.body;
             _context4.n = 1;
-            return db.collection("projects").updateOne({
-              _id: req.params.id
-            }, updateQuery);
-          case 1:
-            res.json({
-              message: "Updated"
+            return db.collection("projects").findOneAndUpdate({
+              projectId: projectId
+            }, {
+              $set: update
+            }, {
+              returnDocument: "after"
             });
-            _context4.n = 3;
-            break;
+          case 1:
+            updatedProject = _context4.v;
+            if (updatedProject.value) {
+              _context4.n = 2;
+              break;
+            }
+            return _context4.a(2, res.status(404).json({
+              error: "Project not found"
+            }));
           case 2:
-            _context4.p = 2;
+            res.json(updatedProject.value);
+            _context4.n = 4;
+            break;
+          case 3:
+            _context4.p = 3;
             _t4 = _context4.v;
             res.status(500).json({
               error: _t4.message
             });
-          case 3:
+          case 4:
             return _context4.a(2);
         }
-      }, _callee4, null, [[0, 2]]);
+      }, _callee4, null, [[0, 3]]);
     }));
     return function (_x7, _x8) {
       return _ref4.apply(this, arguments);
