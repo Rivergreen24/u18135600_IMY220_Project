@@ -9,7 +9,7 @@ export const userRoutes = (app, db) => {
       const publicInfo = {
         userId: user.userId,
         username: user.username,
-        email: user.email || "",           // EMAIL IS NOW PUBLIC
+        email: user.email || "",           
         bio: user.bio || "",
         friends: user.friends || [],
         createdProjects: user.createdProjects || [],
@@ -22,7 +22,7 @@ export const userRoutes = (app, db) => {
     }
   });
 
-  // Get multiple users by userIds (comma-separated query)
+  // Get multiple users by userIds
   app.get("/api/users", async (req, res) => {
     try {
       const idsQuery = req.query.ids;
@@ -37,7 +37,7 @@ export const userRoutes = (app, db) => {
       const publicUsers = users.map((u) => ({
         userId: u.userId,
         username: u.username,
-        email: u.email || "",             // EMAIL IS NOW PUBLIC
+        email: u.email || "",             
         bio: u.bio || "",
         friends: u.friends || [],
         createdProjects: u.createdProjects || [],
@@ -53,13 +53,13 @@ export const userRoutes = (app, db) => {
   // Update user profile
   app.put("/api/users/:id", async (req, res) => {
     try {
-      const { username, bio, email } = req.body;  // Allow email update
+      const { username, bio, email } = req.body;  
       const userId = req.params.id;
 
       const updateFields = {};
       if (username !== undefined) updateFields.username = username;
       if (bio !== undefined) updateFields.bio = bio;
-      if (email !== undefined) updateFields.email = email;  // Allow email change
+      if (email !== undefined) updateFields.email = email; 
 
       if (Object.keys(updateFields).length === 0) {
         return res.status(400).json({ error: "No fields to update" });
@@ -75,12 +75,12 @@ export const userRoutes = (app, db) => {
         return res.status(404).json({ error: "User not found" });
       }
 
-      // Return full public user (including email)
+    
       const u = updatedUser.value;
       res.json({
         userId: u.userId,
         username: u.username,
-        email: u.email || "",             // EMAIL RETURNED
+        email: u.email || "",            
         bio: u.bio || "",
         friends: u.friends || [],
         createdProjects: u.createdProjects || [],

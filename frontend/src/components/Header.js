@@ -1,4 +1,3 @@
-// components/Header.jsx
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -18,9 +17,7 @@ const Header = () => {
   return (
     <header className="app-header">
       <div className="header-container">
-        {/* Logo */}
 
-        {/* Navigation */}
         <nav className="header-nav">
           {user ? (
             <>

@@ -1,7 +1,6 @@
 import React from 'react';
 
 const ProjectPreview = ({ project }) => {
-  // Get contributors from checkins, or empty array if undefined
   const contributors = project.checkins?.map(c => c.user) || [];
 
   return (

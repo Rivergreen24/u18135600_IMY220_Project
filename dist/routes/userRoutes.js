@@ -35,7 +35,6 @@ var userRoutes = exports.userRoutes = function userRoutes(app, db) {
               userId: user.userId,
               username: user.username,
               email: user.email || "",
-              // EMAIL IS NOW PUBLIC
               bio: user.bio || "",
               friends: user.friends || [],
               createdProjects: user.createdProjects || [],
@@ -60,7 +59,7 @@ var userRoutes = exports.userRoutes = function userRoutes(app, db) {
     };
   }());
 
-  // Get multiple users by userIds (comma-separated query)
+  // Get multiple users by userIds
   app.get("/api/users", /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(req, res) {
       var idsQuery, ids, users, publicUsers, _t2;
@@ -91,7 +90,6 @@ var userRoutes = exports.userRoutes = function userRoutes(app, db) {
                 userId: u.userId,
                 username: u.username,
                 email: u.email || "",
-                // EMAIL IS NOW PUBLIC
                 bio: u.bio || "",
                 friends: u.friends || [],
                 createdProjects: u.createdProjects || [],
@@ -125,12 +123,12 @@ var userRoutes = exports.userRoutes = function userRoutes(app, db) {
         while (1) switch (_context3.p = _context3.n) {
           case 0:
             _context3.p = 0;
-            _req$body = req.body, username = _req$body.username, bio = _req$body.bio, email = _req$body.email; // Allow email update
+            _req$body = req.body, username = _req$body.username, bio = _req$body.bio, email = _req$body.email;
             userId = req.params.id;
             updateFields = {};
             if (username !== undefined) updateFields.username = username;
             if (bio !== undefined) updateFields.bio = bio;
-            if (email !== undefined) updateFields.email = email; // Allow email change
+            if (email !== undefined) updateFields.email = email;
             if (!(Object.keys(updateFields).length === 0)) {
               _context3.n = 1;
               break;
@@ -157,13 +155,11 @@ var userRoutes = exports.userRoutes = function userRoutes(app, db) {
               error: "User not found"
             }));
           case 3:
-            // Return full public user (including email)
             u = updatedUser.value;
             res.json({
               userId: u.userId,
               username: u.username,
               email: u.email || "",
-              // EMAIL RETURNED
               bio: u.bio || "",
               friends: u.friends || [],
               createdProjects: u.createdProjects || [],

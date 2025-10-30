@@ -33,9 +33,8 @@ const LoginForm = () => {
             const data = await response.json();
 
             if (data.success) {
-                // Store the user info including userId in localStorage
                 const userWithId = {
-                    userId: data.user.userId, // <- make sure backend returns this
+                    userId: data.user.userId,
                     username: data.user.username,
                     email: data.user.email
                 };

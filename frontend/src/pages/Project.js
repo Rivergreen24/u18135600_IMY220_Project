@@ -16,13 +16,11 @@ const Project = () => {
   const [activeTab, setActiveTab] = useState("files");
   const [currentUser, setCurrentUser] = useState(null);
 
-  // Load current user from localStorage
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user") || "{}");
     setCurrentUser(user);
   }, []);
 
-  // Fetch project
   useEffect(() => {
     const fetchProject = async () => {
       try {
@@ -39,7 +37,6 @@ const Project = () => {
     fetchProject();
   }, [id]);
 
-  // Fetch owner
   useEffect(() => {
     if (!project?.owner) return;
     const fetchOwner = async () => {
@@ -56,7 +53,6 @@ const Project = () => {
     fetchOwner();
   }, [project?.owner]);
 
-  // Fetch contributors
   useEffect(() => {
     if (!project?.members?.length) {
       setContributorsData([]);
@@ -82,7 +78,6 @@ const Project = () => {
     fetchContributors();
   }, [project?.members]);
 
-  // === OWNER ACTIONS ===
   const isOwner = currentUser?.userId === project?.owner;
 
   const handleRemoveMember = async (userId) => {
@@ -96,16 +91,14 @@ const Project = () => {
         body: JSON.stringify({ userId }),
       });
 
-      // Instead of reading JSON, just reload the project
       const res = await fetch(`/api/projects/${id}`);
       const data = await res.json();
       setProject(data);
     } finally {
-      // optional: silently ignore errors
+      // optional: 
     }
   };
 
-  // Transfer ownership
   const handleTransferOwnership = async (newOwnerId) => {
     if (!isOwner) return alert("Only owner can transfer");
     if (!confirm("Transfer ownership?")) return;
@@ -117,7 +110,6 @@ const Project = () => {
         body: JSON.stringify({ newOwnerId }),
       });
 
-      // Reload project to reflect new owner
       const res = await fetch(`/api/projects/${id}`);
       const data = await res.json();
       setProject(data);
@@ -133,14 +125,12 @@ const Project = () => {
 
     try {
       await fetch(`/api/projects/${id}`, { method: "DELETE" });
-      // Navigate home, no JSON parsing needed
       navigate("/");
     } catch (err) {
       console.error("Failed to delete project", err);
     }
   };
 
-  // === MEMBER ACTIONS ===
   const isMember = project?.members?.includes(currentUser?.userId);
 
   const handleAddMember = async () => {
@@ -155,13 +145,11 @@ const Project = () => {
         body: JSON.stringify({ userId: friendId }),
       });
 
-      // reload project instead of parsing response
       const res = await fetch(`/api/projects/${id}`);
       const data = await res.json();
       setProject(data);
     } catch (err) {
       console.error("Failed to add member", err);
-      // silently ignore
     }
   };
 
@@ -272,8 +260,6 @@ const Project = () => {
           </div>
         </div>
 
-        {/* Tabs */}
-        {/* Tabs */}
         <div className="tab-container">
           <div className="tab-nav">
             <button

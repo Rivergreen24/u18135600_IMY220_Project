@@ -14,7 +14,6 @@
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-/* Profile Card */
 .profile-card {
   background: rgba(230, 214, 152, 0.2);
   border: 1px solid rgba(230, 214, 152, 0.3);
@@ -39,7 +38,6 @@
   font-size: 1rem;
 }
 
-/* Edit Form */
 .edit-profile-form {
   background: rgba(230, 214, 152, 0.7);
   padding: 1.5rem;
@@ -72,9 +70,6 @@
   background: #d4c37a;
 }
 
-/* ───────────────────────────────────────
-   PROFILE SECTION TITLES – CLEAN & PRO
-   ─────────────────────────────────────── */
 .profile-container h2 {
   font-family: 'Brawler', serif;
   font-size: 1.8rem;
@@ -88,7 +83,6 @@
   letter-spacing: 0.5px;
 }
 
-/* Subtle gold accent line under title */
 .profile-container h2::after {
   content: '';
   position: absolute;
@@ -102,7 +96,6 @@
   box-shadow: 0 2px 4px rgba(230, 214, 152, 0.4);
 }
 
-/* Responsive */
 @media (max-width: 600px) {
   .profile-container h2 {
     font-size: 1.6rem;

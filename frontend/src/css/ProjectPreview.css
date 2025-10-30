@@ -1,6 +1,5 @@
-
 .project-card {
-  background: rgba(230, 214, 152, 0.15);          /* Soft gold glass */
+  background: rgba(230, 214, 152, 0.15);     
   border: 1px solid rgba(230, 214, 152, 0.35);
   border-radius: 14px;
   padding: 1.4rem;
@@ -12,14 +11,12 @@
   overflow: hidden;
 }
 
-/* Hover Lift + Glow */
 .project-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
   border-color: #e6d698;
 }
 
-/* Subtle inner glow on hover */
 .project-card::before {
   content: '';
   position: absolute;
@@ -35,7 +32,6 @@
   opacity: 1;
 }
 
-/* Title */
 .project-card h3 {
   font-family: 'Brawler', serif;
   font-size: 1.35rem;
@@ -44,7 +40,6 @@
   font-weight: 600;
 }
 
-/* Description */
 .project-card p {
   font-family: 'Roboto', sans-serif;
   color: #e6d698;
@@ -54,7 +49,6 @@
   opacity: 0.92;
 }
 
-/* Strong labels */
 .project-card strong {
   color: #fff;
   font-weight: 600;
@@ -62,7 +56,6 @@
   display: inline-block;
 }
 
-/* Status Badge (optional enhancement) */
 .project-card p:last-child {
   margin-top: 0.8rem;
   font-size: 0.9rem;
@@ -74,7 +67,6 @@
   font-weight: 600;
 }
 
-/* If you want a real badge */
 .status-inline {
   display: inline-block;
   background: rgba(4, 28, 40, 0.6);
@@ -87,7 +79,6 @@
   margin-left: 0.5rem;
 }
 
-/* Responsive: stack on small screens */
 @media (max-width: 600px) {
   .project-card {
     padding: 1.2rem;

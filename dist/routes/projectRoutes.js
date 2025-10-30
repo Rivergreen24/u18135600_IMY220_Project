@@ -202,7 +202,7 @@ var projectRoutes = exports.projectRoutes = function projectRoutes(app, db) {
             //   return res.status(404).json({ error: "Project not found" });
             // }
 
-            res.json(result.value); // always valid JSON
+            res.json(result.value);
             _context5.n = 4;
             break;
           case 3:
@@ -321,7 +321,7 @@ var projectRoutes = exports.projectRoutes = function projectRoutes(app, db) {
               name: {
                 $regex: q,
                 $options: "i"
-              } // Only name
+              }
             }).limit(10).toArray();
           case 2:
             projects = _context9.v;

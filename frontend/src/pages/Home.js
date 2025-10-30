@@ -1,4 +1,3 @@
-// pages/Home.jsx
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Feed from "../components/Feed";
@@ -12,12 +11,11 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [username, setUsername] = useState("");
-  const [isLocal, setIsLocal] = useState(true); // Start on Local Feed
+  const [isLocal, setIsLocal] = useState(true);
 
   const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
   const currentUserId = storedUser.userId;
 
-  // Fetch current user and all projects
   useEffect(() => {
     if (!currentUserId) {
       window.location.href = "/login";
@@ -26,13 +24,11 @@ const Home = () => {
 
     const fetchData = async () => {
       try {
-        // Fetch current user
         const userRes = await fetch(`/api/users/${currentUserId}`);
         if (!userRes.ok) throw new Error("Failed to fetch user");
         const userData = await userRes.json();
         setUsername(userData.username);
 
-        // Fetch all projects
         const projRes = await fetch("/api/projects");
         if (!projRes.ok) throw new Error("Failed to fetch projects");
         const allProjectsData = await projRes.json();
@@ -42,7 +38,6 @@ const Home = () => {
         );
         setAllProjects(sorted);
 
-        // Start with Local Feed
         filterLocalFeed(sorted, userData);
       } catch (err) {
         console.error(err);
@@ -55,7 +50,6 @@ const Home = () => {
     fetchData();
   }, [currentUserId]);
 
-  // Re-filter when toggle changes
   useEffect(() => {
     if (!allProjects.length) return;
 
@@ -78,7 +72,6 @@ const Home = () => {
     refreshAndFilter();
   }, [isLocal, allProjects, currentUserId]);
 
-  // Filter Local Feed
   const filterLocalFeed = (projects, userData) => {
     const created = projects.filter(p => p.owner === currentUserId);
     const saved = projects.filter(p =>
@@ -91,13 +84,11 @@ const Home = () => {
     setDisplayedProjects(localProjects);
   };
 
-  // Fetch owner and contributors usernames
   useEffect(() => {
     if (!displayedProjects.length) return;
 
     const fetchUsernames = async () => {
       try {
-        // Collect all unique user IDs (owners + members)
         const userIds = new Set();
         displayedProjects.forEach(p => {
           userIds.add(p.owner);
@@ -115,7 +106,6 @@ const Home = () => {
           }
         }
 
-        // Map usernames into each project
         setDisplayedProjects(prev =>
           prev.map(p => ({
             ...p,
@@ -141,8 +131,6 @@ const Home = () => {
     <div className="home-container">
       <Header />
       <h2 className="home-header">Home Page</h2>
-
-      {/* SINGLE TOGGLE BUTTON */}
       
       {/* SEARCH BAR */}
       <SearchInput allProjects={allProjects} currentUserId={currentUserId} />

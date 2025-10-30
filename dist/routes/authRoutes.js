@@ -30,7 +30,6 @@ var authRoutes = exports.authRoutes = function authRoutes(app, db) {
                 message: "Login successful",
                 user: {
                   userId: user.userId,
-                  // <-- include this
                   username: user.username,
                   email: user.email
                 }
@@ -70,8 +69,8 @@ var authRoutes = exports.authRoutes = function authRoutes(app, db) {
         while (1) switch (_context2.p = _context2.n) {
           case 0:
             _context2.p = 0;
-            _req$body2 = req.body, username = _req$body2.username, email = _req$body2.email, password = _req$body2.password; // Generate a userId here (or let frontend provide one if you want)
-            userId = "u".concat(Date.now()); // simple unique id
+            _req$body2 = req.body, username = _req$body2.username, email = _req$body2.email, password = _req$body2.password;
+            userId = "u".concat(Date.now());
             _context2.n = 1;
             return db.collection("users").insertOne({
               userId: userId,

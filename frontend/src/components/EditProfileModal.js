@@ -1,4 +1,3 @@
-// components/EditProfileModal.jsx
 import React, { useState } from "react";
 
 const EditProfileModal = ({ user, onClose, onUpdate }) => {
@@ -10,7 +9,6 @@ const EditProfileModal = ({ user, onClose, onUpdate }) => {
     setSaving(true);
 
     try {
-      // CALL THE CORRECT ENDPOINT
       const res = await fetch(`/api/users/${user.userId}/bio`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

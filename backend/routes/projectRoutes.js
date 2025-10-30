@@ -71,7 +71,7 @@ export const projectRoutes = (app, db) => {
       //   return res.status(404).json({ error: "Project not found" });
       // }
 
-      res.json(result.value); // always valid JSON
+      res.json(result.value); 
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
@@ -111,7 +111,7 @@ app.get("/api/projects/search", async (req, res) => {
 
   try {
     const projects = await db.collection("projects").find({
-      name: { $regex: q, $options: "i" } // Only name
+      name: { $regex: q, $options: "i" } 
     }).limit(10).toArray();
 
     res.json(projects);

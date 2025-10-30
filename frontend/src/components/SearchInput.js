@@ -86,7 +86,6 @@ const SearchInput = ({ currentUserId }) => {
 
   return (
     <div className="search-wrapper">
-      {/* INPUT + BUTTON IN ONE ROW */}
       <div className="search-bar-row">
         <input
           type="text"
@@ -106,8 +105,6 @@ const SearchInput = ({ currentUserId }) => {
 
 
 
-
-      {/* RESULTS */}
       {loading && <p className="search-loading">Searching...</p>}
 
       {results.length > 0 && (

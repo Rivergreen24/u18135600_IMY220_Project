@@ -1,4 +1,3 @@
-// components/ProfileComp.jsx
 import React from "react";
 
 const ProfileComp = ({ profileData }) => {

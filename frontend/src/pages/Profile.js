@@ -1,4 +1,3 @@
-// pages/Profile.js
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../components/Header";
@@ -34,7 +33,6 @@ const Profile = () => {
         const userData = await userRes.json();
         setUser(userData);
 
-        // Pre-fill edit form
         setFormData({ username: userData.username, bio: userData.bio || "" });
 
         const allProjectsRes = await fetch(`/api/projects`);
@@ -50,7 +48,6 @@ const Profile = () => {
 
         setProjects([...userCreatedProjects, ...userSavedProjects]);
 
-        // Fetch friends
         const friendsData = [];
         for (let friendId of userData.friends) {
           const friendRes = await fetch(`/api/users/${friendId}`);

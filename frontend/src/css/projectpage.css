@@ -1,6 +1,5 @@
 .project-container {
   min-height: 100vh;
-  /* background: linear-gradient(135deg, #447c93, #041c28); */
   padding: 20px;
   font-family: 'Roboto', sans-serif;
   color: #e6d698;
@@ -21,7 +20,6 @@
   margin-bottom: 1.5rem;
 }
 
-/* Sections */
 .project-section {
   background: rgba(230, 214, 152, 0.15);
   border: 1px solid rgba(230, 214, 152, 0.3);
@@ -40,7 +38,6 @@
   margin-bottom: 1rem;
 }
 
-/* Info Grid */
 .info-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -76,7 +73,6 @@
   min-width: 100px;
 }
 
-/* Status Badge */
 .status-badge {
   padding: 0.4rem 0.8rem;
   border-radius: 20px;
@@ -87,7 +83,6 @@
   border: 1px solid rgba(230, 214, 152, 0.3);
 }
 
-/* Tabs */
 .tab-container {
   background: rgba(230, 214, 152, 0.1);
   border: 1px solid rgba(230, 214, 152, 0.25);
@@ -128,7 +123,6 @@
   padding: 1.5rem;
 }
 
-/* Messages */
 .message-item {
   background: #d9c98e;
   color: #041c28;
@@ -139,9 +133,6 @@
   font-family: 'Courier New', monospace;
 }
 
-/* ───────────────────────────────────────
-   CENTER EDIT PROJECT FORM
-   ─────────────────────────────────────── */
 .edit-section {
   display: flex;
   justify-content: center;

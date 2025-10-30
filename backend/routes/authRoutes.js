@@ -10,7 +10,7 @@ export const authRoutes = (app, db) => {
           success: true,
           message: "Login successful",
           user: {
-            userId: user.userId, // <-- include this
+            userId: user.userId,
             username: user.username,
             email: user.email
           }
@@ -28,8 +28,7 @@ export const authRoutes = (app, db) => {
   app.post("/api/auth/signup", async (req, res) => {
     try {
       const { username, email, password } = req.body;
-      // Generate a userId here (or let frontend provide one if you want)
-      const userId = `u${Date.now()}`; // simple unique id
+      const userId = `u${Date.now()}`; 
       const result = await db.collection("users").insertOne({ userId, username, email, password });
       res.json({ user: { userId, username, email } });
     } catch (err) {

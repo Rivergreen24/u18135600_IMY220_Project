@@ -14,7 +14,6 @@ const SignUpForm = () => {
     const handleSignup = async (e) => {
     e.preventDefault();
 
-    //very basic varification, make changes to make it better
     if (!email || !password || !confirmPassword) {
       setError("All fields are required.");
       return;
